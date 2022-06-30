@@ -17,15 +17,16 @@ export class App extends Component {
 
   componentDidMount() {
    const contacts = JSON.parse(localStorage.getItem('my-contacts'));
-    if (contacts?.length) {
+    if (contacts) {
       this.setState({
         contacts,
       });
     }
   }
-  componentDidUpdate() {
-    const { contacts } = this.state;
-    localStorage.setItem('my-contacts', JSON.stringify(contacts));
+  componentDidUpdate(prPrs, {contacts}) {
+    if (contacts !== this.state.contacts) {
+      localStorage.setItem('my-contacts', JSON.stringify(this.state.contacts));
+    }
   }
 
   addContact = ({ name, number }) => {
@@ -67,7 +68,7 @@ export class App extends Component {
     );
     return renderArr;
   };
-  
+
   render() {
     const { addContact, handleFilter, removeContact } = this;
     const { filter } = this.state;
