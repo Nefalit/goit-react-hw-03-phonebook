@@ -6,21 +6,19 @@ import ContactList from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
-    contacts: [
-    { id: nanoid(), name: 'dArtagnan', number: '132-14-88' },
-    ],
+    contacts: [{ id: nanoid(), name: 'dArtagnan', number: '123-45-67' }],
     filter: '',
   };
 
   componentDidMount() {
-   const contacts = JSON.parse(localStorage.getItem('my-contacts'));
+    const contacts = JSON.parse(localStorage.getItem('my-contacts'));
     if (contacts) {
       this.setState({
         contacts,
       });
     }
   }
-  componentDidUpdate(prPrs, {contacts}) {
+  componentDidUpdate(prPrs, { contacts }) {
     if (contacts !== this.state.contacts) {
       localStorage.setItem('my-contacts', JSON.stringify(this.state.contacts));
     }
